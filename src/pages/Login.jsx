@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 import "../index.css";
+import Swal from "sweetalert2";
+
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -17,7 +19,11 @@ const Login = () => {
       await loginUser(formData);
       navigate("/dashboard");
     } catch {
-      alert("Invalid login credentials.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid login credentials.",
+      });
     }
   };
 
